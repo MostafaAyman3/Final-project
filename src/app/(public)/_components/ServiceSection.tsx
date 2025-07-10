@@ -26,7 +26,7 @@ const ServiceSection = ({
   const isLeft = side === "left";
 
   return (
-    <section className="px-4 sm:px-6 lg:px-8 py-20">
+    <section className="px-4 sm:px-6 lg:px-8 py-20" id="service-section">
       <div className="mx-auto max-w-7xl">
         <div
           className={cn(

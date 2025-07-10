@@ -1,6 +1,8 @@
 import { Particles } from "@/components/magicui/particles";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Bot, Telescope } from "lucide-react";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -21,9 +23,12 @@ const Hero = () => {
             delivers instant medical insights—anytime, anywhere.
           </p>
           <div className="flex lg:flex-row flex-col justify-center items-center gap-2 mt-4">
-            <Button size="lg">
+            <Link
+              href="#service-section"
+              className={cn(buttonVariants({ size: "lg" }))}
+            >
               <Telescope /> Start a Diagnosis Now
-            </Button>
+            </Link>
             <Button size="lg" variant="outline">
               <Bot />
               Chat with AI Consultant

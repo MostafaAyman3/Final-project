@@ -58,7 +58,7 @@ export default function EyeDiagnosisPage() {
       .join(" ");
   };
   return (
-    <div className="flex flex-col justify-center items-center p-4 h-[calc(100vh-53px)]">
+    <div className="flex flex-col justify-center items-center p-4 min-h-[calc(100vh-53px)]">
       <div className="space-y-6 w-full max-w-lg">
         <Card>
           <CardHeader>
