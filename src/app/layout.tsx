@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import NextTopLoader from "nextjs-toploader";
+import AiChatDialog from "@/components/shared/ai-chat/AiChatDialog";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={` antialiased w-screen h-screen overflow-x-hidden overflow-y-auto`}
+        className={`relative antialiased w-screen h-screen overflow-x-hidden overflow-y-auto`}
       >
         <ThemeProvider
           attribute="class"
@@ -47,6 +48,7 @@ export default function RootLayout({
             showSpinner={false}
           />
           {children}
+          <AiChatDialog />
         </ThemeProvider>
       </body>
     </html>

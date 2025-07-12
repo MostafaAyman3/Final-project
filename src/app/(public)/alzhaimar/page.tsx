@@ -19,7 +19,7 @@ type PredictionResponse = {
   filename: string;
 };
 
-export default function BloodDiagnosisPage() {
+export default function AlzhaimarPage() {
   const [prediction, setPrediction] = useState<PredictionResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -85,7 +85,7 @@ export default function BloodDiagnosisPage() {
                   formData.append("file", file);
 
                   const res = await fetch(
-                    "https://feghyyy-blood-model.hf.space/blood-predict/",
+                    "https://feghyyy-alzahimer.hf.space/zahaimar-predict/",
                     {
                       method: "POST",
                       body: formData,

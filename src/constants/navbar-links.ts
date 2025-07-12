@@ -17,7 +17,7 @@ export const navbarLinks = [
   },
   {
     label: "Alzahaimar",
-    href: "/alzahaimar",
+    href: "/alzhaimar",
   },
   {
     label: "Brain Tumor",
