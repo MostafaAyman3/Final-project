@@ -1,4 +1,5 @@
 import { Particles } from "@/components/magicui/particles";
+import AiChatDialog from "@/components/shared/ai-chat/AiChatDialog";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Bot, Telescope } from "lucide-react";
@@ -29,10 +30,12 @@ const Hero = () => {
             >
               <Telescope /> Start a Diagnosis Now
             </Link>
-            <Button size="lg" variant="outline">
-              <Bot />
-              Chat with AI Consultant
-            </Button>
+            <AiChatDialog>
+              <Button size="lg" variant="outline">
+                <Bot />
+                Chat with AI Consultant
+              </Button>
+            </AiChatDialog>
           </div>
         </div>
       </div>
