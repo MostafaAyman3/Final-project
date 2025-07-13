@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Upload, X, Loader2 } from "lucide-react";
-import { useState, useRef, type ChangeEvent } from "react";
+import { Upload, X, Loader2, Clipboard } from "lucide-react";
+import { useState, useRef, type ChangeEvent, useEffect } from "react";
 import Image from "next/image";
 
 interface FileUploadProps {
@@ -31,6 +31,48 @@ export function FileUploader({
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Add clipboard paste event listener
+  useEffect(() => {
+    const handlePaste = async (e: ClipboardEvent) => {
+      if (disabled) return;
+
+      const items = e.clipboardData?.items;
+      if (!items) return;
+
+      // Reset states
+      setError(null);
+      setSuccess(false);
+
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf("image") !== -1) {
+          const file = items[i].getAsFile();
+          if (!file) continue;
+
+          // Validate file size
+          if (file.size > maxSize * 1024 * 1024) {
+            setError(`File size must be less than ${maxSize}MB`);
+            return;
+          }
+
+          setSelectedFile(file);
+
+          // Create preview
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            setPreview(e.target?.result as string);
+          };
+          reader.readAsDataURL(file);
+          break;
+        }
+      }
+    };
+
+    document.addEventListener("paste", handlePaste);
+    return () => {
+      document.removeEventListener("paste", handlePaste);
+    };
+  }, [disabled, maxSize]);
 
   const handleFileSelect = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -129,7 +171,30 @@ export function FileUploader({
     e.stopPropagation();
 
     const files = e.dataTransfer.files;
-    console.log("Files dropped:", files);
+    if (files.length > 0) {
+      const file = files[0];
+
+      // Validate file type
+      if (!file.type.startsWith("image/")) {
+        setError("Please select a valid image file");
+        return;
+      }
+
+      // Validate file size
+      if (file.size > maxSize * 1024 * 1024) {
+        setError(`File size must be less than ${maxSize}MB`);
+        return;
+      }
+
+      setSelectedFile(file);
+
+      // Create preview
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setPreview(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -154,6 +219,10 @@ export function FileUploader({
               <p className="text-muted-foreground text-xs">
                 PNG, JPG, GIF up to {maxSize}MB
               </p>
+              <div className="flex items-center mt-2 text-xs text-muted-foreground">
+                <Clipboard className="w-3 h-3 mr-1" />
+                <span>You can also paste from clipboard (Ctrl+V)</span>
+              </div>
             </CardContent>
           </Card>
         ) : (
