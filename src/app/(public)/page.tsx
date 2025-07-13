@@ -46,7 +46,12 @@ export default function Home() {
         />
         <ServiceSection
           title="Brain Tumor Detection"
-          description="AI-powered MRI interpretation for detecting and classifying brain tumors."
+          description={`This AI-powered model analyzes brain MRI scans to detect and precisely segment potential tumors. It utilizes advanced deep learning algorithms to assist doctors and radiologists in identifying abnormal growths.
+                        Key Functions:
+                        - Detection: Determines if a tumor is present in the MRI scan.
+                        - Segmentation: If a tumor is found, it highlights its exact location .
+                        Supported Modality:
+                        The model works exclusively with brain MRIs (T1-weighted or T2-weighted axial slices) in PNG or JPEG format. It does not support CT scans, X-rays, or PET images.`}
           cta="Explore Brain Tumor Detection"
           ctaLink="/brain-tumor"
           image="/brain.jpg"

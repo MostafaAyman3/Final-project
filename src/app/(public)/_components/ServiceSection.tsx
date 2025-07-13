@@ -47,7 +47,7 @@ const ServiceSection = ({
               {title}
             </h2>
 
-            <p className="max-w-2xl text-muted-foreground text-lg leading-relaxed">
+            <p className="max-w-2xl text-muted-foreground text-lg leading-relaxed whitespace-pre-line">
               {description}
             </p>
 
