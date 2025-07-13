@@ -85,7 +85,7 @@ export default function AlzhaimarPage() {
                   formData.append("file", file);
 
                   const res = await fetch(
-                    "https://feghyyy-alzahimer.hf.space/zahaimar-predict/",
+                    "https://islamfekryx0-alzahimer.hf.space/zahaimar-predict/",
                     {
                       method: "POST",
                       body: formData,

@@ -12,7 +12,9 @@ export default function Home() {
       <section className="container mx-auto max-w-7xl overflow-hidden">
         <ServiceSection
           title="Skin Diagnosis"
-          description="AI analysis for conditions like acne, rashes, eczema, moles, and more."
+          description="Analyze skin photos using AI to detect common conditions like acne, eczema, moles, and skin cancer risks.
+                        Fast, accurate, and easy — just upload a photo and get insights in seconds.
+"
           cta="Explore Skin Diagnosis"
           ctaLink="/skin-diagnosis"
           image="/skin.jpg"
@@ -38,7 +40,7 @@ export default function Home() {
           title="Alzheimer’s Screening"
           description="Early cognitive screening using language, behavior, and test data."
           cta="Explore Alzheimer’s Screening"
-          ctaLink="/alzheimer"
+          ctaLink="/alzhaimar"
           image="/alzheimer.jpg"
           side="right"
         />

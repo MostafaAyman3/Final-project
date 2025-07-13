@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, AlertCircle, Brain } from "lucide-react";
+import { CheckCircle, AlertCircle, Droplets } from "lucide-react";
 
 type PredictionResponse = {
   prediction: string;
@@ -26,29 +26,25 @@ export default function BloodDiagnosisPage() {
   const getStatusIcon = (prediction: string) => {
     switch (prediction.toLowerCase()) {
       case "normal":
-      case "no_dementia":
         return <CheckCircle className="w-5 h-5 text-green-500" />;
-      case "mild_dementia":
+      case "parasitic":
         return <AlertCircle className="w-5 h-5 text-yellow-500" />;
-      case "moderate_dementia":
-      case "severe_dementia":
-      case "very_mild_dementia":
+      case "bacterial":
+      case "viral":
         return <AlertCircle className="w-5 h-5 text-red-500" />;
       default:
-        return <Brain className="w-5 h-5 text-blue-500" />;
+        return <Droplets className="w-5 h-5 text-blue-500" />;
     }
   };
 
   const getStatusColor = (prediction: string) => {
     switch (prediction.toLowerCase()) {
       case "normal":
-      case "no_dementia":
         return "bg-green-100 text-green-800 border-green-200";
-      case "mild_dementia":
+      case "parasitic":
         return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      case "moderate_dementia":
-      case "severe_dementia":
-      case "very_mild_dementia":
+      case "bacterial":
+      case "viral":
         return "bg-red-100 text-red-800 border-red-200";
       default:
         return "bg-blue-100 text-blue-800 border-blue-200";
@@ -67,11 +63,10 @@ export default function BloodDiagnosisPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-primary">
-              <Brain /> Alzheimer&apos;s Diagnosis
+              <Droplets /> Blood Diagnosis
             </CardTitle>
             <CardDescription>
-              Upload a brain MRI image for Alzheimer&apos;s disease detection
-              and assessment.
+              Upload a blood cell image for infection detection and analysis.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -85,7 +80,7 @@ export default function BloodDiagnosisPage() {
                   formData.append("file", file);
 
                   const res = await fetch(
-                    "https://feghyyy-blood-model.hf.space/blood-predict/",
+                    "https://islamfekryx0-blood-model.hf.space/blood-predict/",
                     {
                       method: "POST",
                       body: formData,
@@ -127,8 +122,7 @@ export default function BloodDiagnosisPage() {
                   <p className="text-muted-foreground text-sm">Diagnosis</p>
                   <p
                     className={`text-lg font-semibold ${
-                      prediction.prediction.toLowerCase() === "normal" ||
-                      prediction.prediction.toLowerCase() === "no_dementia"
+                      prediction.prediction.toLowerCase() === "normal"
                         ? "text-green-600"
                         : "text-red-600"
                     }`}
@@ -179,29 +173,27 @@ export default function BloodDiagnosisPage() {
               </div>
 
               {/* Health Advisory */}
-              {prediction.prediction.toLowerCase() !== "normal" &&
-                prediction.prediction.toLowerCase() !== "no_dementia" && (
-                  <div className="bg-amber-50 p-4 border border-amber-200 rounded-lg">
-                    <p className="text-amber-800 text-sm">
-                      <strong>Important:</strong> This AI analysis suggests
-                      potential signs of cognitive decline. This is for
-                      informational purposes only and should not replace
-                      professional medical assessment. Please consult with a
-                      qualified neurologist or healthcare professional for
-                      proper evaluation, diagnosis, and treatment planning.
-                    </p>
-                  </div>
-                )}
+              {prediction.prediction.toLowerCase() !== "normal" && (
+                <div className="bg-amber-50 p-4 border border-amber-200 rounded-lg">
+                  <p className="text-amber-800 text-sm">
+                    <strong>Important:</strong> This AI analysis suggests
+                    potential signs of blood infection. This is for
+                    informational purposes only and should not replace
+                    professional medical assessment. Please consult with a
+                    qualified hematologist or healthcare professional for proper
+                    evaluation, diagnosis, and treatment planning.
+                  </p>
+                </div>
+              )}
 
-              {(prediction.prediction.toLowerCase() === "normal" ||
-                prediction.prediction.toLowerCase() === "no_dementia") && (
+              {prediction.prediction.toLowerCase() === "normal" && (
                 <div className="bg-green-50 p-4 border border-green-200 rounded-lg">
                   <p className="text-green-800 text-sm">
                     <strong>Good news:</strong> This analysis suggests normal
-                    cognitive patterns. However, this is an AI-generated
+                    blood cell patterns. However, this is an AI-generated
                     analysis for informational purposes only. Regular medical
-                    check-ups and cognitive assessments are still recommended
-                    for ongoing brain health monitoring.
+                    check-ups are still recommended for ongoing health
+                    monitoring.
                   </p>
                 </div>
               )}
@@ -216,7 +208,7 @@ export default function BloodDiagnosisPage() {
               <div className="text-center">
                 <div className="mx-auto mb-2 border-primary border-b-2 rounded-full w-8 h-8 animate-spin"></div>
                 <p className="text-muted-foreground text-sm">
-                  Analyzing brain MRI for Alzheimer&apos;s assessment...
+                  Analyzing blood cell image...
                 </p>
               </div>
             </CardContent>
