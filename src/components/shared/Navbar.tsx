@@ -11,10 +11,10 @@ import MobileMenu from "./MobileMenu";
 const Navbar = () => {
   const pathname = usePathname();
   return (
-    <header className="w-full h-[53px] flex items-center justify-center border-dashed bg-background/50 backdrop-blur-sm border-b border-border">
-      <nav className="container px-2 md:px-4 lg:px-6 py-2 mx-auto flex items-center justify-between">
+    <header className="flex justify-center items-center bg-background/50 backdrop-blur-sm border-b border-border border-dashed w-full h-[53px]">
+      <nav className="flex justify-between items-center mx-auto px-2 md:px-4 lg:px-6 py-2 container">
         <LogoLink />
-        <div className="items-center gap-2 hidden lg:flex">
+        <div className="hidden lg:flex items-center gap-2">
           {navbarLinks.map((link) => (
             <Link
               href={link.href}
