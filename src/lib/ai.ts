@@ -5,10 +5,12 @@ export const ai = new GoogleGenAI({
 });
 
 const MODEL_PRIORITY = [
-  "gemini-3-pro-preview",
   "gemini-2.5-pro",
-  "gemini-flash-latest",
+  "gemini-2.5-flash",
+  "gemini-2.5-flash-lite",
 ];
+
+const RETRY_DELAY_MS = 2000;
 
 const isRateOrQuotaError = (error: unknown) => {
   if (!error) return false;
@@ -23,6 +25,8 @@ const isRateOrQuotaError = (error: unknown) => {
   return (
     maybeAny.status === 429 ||
     maybeAny.code === 429 ||
+    maybeAny.status === 503 ||
+    maybeAny.code === 503 ||
     message.includes("rate limit") ||
     message.includes("resource exhausted") ||
     message.includes("quota")
@@ -32,6 +36,10 @@ const isRateOrQuotaError = (error: unknown) => {
 type GenerateContentPayload = Parameters<
   GoogleGenAI["models"]["generateContent"]
 >[0];
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+type SafeFallbackResponse = { text: string; error: true };
 
 export async function generateContentWithFallback(
   payload: Omit<GenerateContentPayload, "model">
@@ -51,12 +59,20 @@ export async function generateContentWithFallback(
         console.warn(
           `[AI] Model "${model}" failed due to rate/quota limits. Trying next fallback.`
         );
+        await sleep(RETRY_DELAY_MS);
         continue;
       }
 
-      throw error;
+      break;
     }
   }
 
-  throw lastError ?? new Error("All Gemini models failed.");
+  console.error("[AI] All Gemini models failed.", lastError);
+
+  const safeResponse: SafeFallbackResponse = {
+    text: "عذراً، نواجه ضغطاً كبيراً على الخوادم حالياً. يرجى الانتظار دقيقة واحدة ثم المحاولة مرة أخرى.",
+    error: true,
+  };
+
+  return safeResponse;
 }
