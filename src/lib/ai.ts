@@ -5,15 +5,19 @@ export const ai = new GoogleGenAI({
 });
 
 const MODEL_PRIORITY = [
-  "gemini-3.0-pro",
+  "gemini-3-pro-preview",
   "gemini-2.5-pro",
-  "gemini-2.5-flash",
+  "gemini-flash-latest",
 ];
 
 const isRateOrQuotaError = (error: unknown) => {
   if (!error) return false;
 
-  const maybeAny = error as { status?: number; code?: number; message?: string };
+  const maybeAny = error as {
+    status?: number;
+    code?: number;
+    message?: string;
+  };
   const message = maybeAny.message?.toLowerCase() ?? "";
 
   return (
