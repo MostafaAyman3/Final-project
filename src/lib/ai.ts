@@ -1,4 +1,4 @@
-import { GoogleGenAI, type GenerateContentRequest } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
 export const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -25,8 +25,12 @@ const isRateOrQuotaError = (error: unknown) => {
   );
 };
 
+type GenerateContentPayload = Parameters<
+  GoogleGenAI["models"]["generateContent"]
+>[0];
+
 export async function generateContentWithFallback(
-  payload: Omit<GenerateContentRequest, "model">
+  payload: Omit<GenerateContentPayload, "model">
 ) {
   let lastError: unknown;
 
