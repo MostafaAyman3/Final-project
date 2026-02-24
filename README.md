@@ -17,7 +17,8 @@
 
 ---
 
-![Smart Doctor Platform](./assets/demo.png)
+<!-- Add your demo screenshot here: ./assets/demo.png -->
+<img src="./public/SD.png" alt="Smart Doctor Platform" width="400">
 
 </div>
 
@@ -483,7 +484,8 @@ Interactive API documentation available at:
 
 ### Platform Preview
 
-![Smart Doctor Demo](./assets/demo.png)
+<!-- Add your demo screenshot here -->
+<img src="./public/SD.png" alt="Smart Doctor Demo" width="600">
 
 ### Live Demo
 
@@ -536,7 +538,7 @@ Interactive API documentation available at:
 
 ### Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+We welcome contributions! Please follow these steps:
 
 ```bash
 # Fork the repository
@@ -586,7 +588,7 @@ copies or substantial portions of the Software.
 
 ### ⭐ Star this repository if you find it helpful!
 
-**[🌐 Live Platform](https://smart-doctorr.vercel.app/)** · **[📧 Contact](mailto:contact@smartdoctor.ai)** · **[🐛 Report Bug](https://github.com/MostafaAyman3/Final-project/issues)**
+**[🌐 Live Platform](https://smart-doctorr.vercel.app/)** · **[🐛 Report Bug](https://github.com/MostafaAyman3/Final-project/issues)** · **[💡 Request Feature](https://github.com/MostafaAyman3/Final-project/issues)**
 
 ---
 
