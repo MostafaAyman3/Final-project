@@ -487,6 +487,10 @@ Interactive API documentation available at:
 <!-- Add your demo screenshot here -->
 <img src="./public/SD.png" alt="Smart Doctor Demo" width="600">
 
+### Brain Tumor Model Demo
+
+<img src="./demo_smart.png" alt="Brain Tumor Model Demo" width="600">
+
 ### Live Demo
 
 🌐 **[Try Smart Doctor Now →](https://smart-doctorr.vercel.app/)**
