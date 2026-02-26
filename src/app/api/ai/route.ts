@@ -1,4 +1,4 @@
-import { ai } from "@/lib/ai";
+import { generateContentWithFallback } from "@/lib/ai";
 import { MessageType } from "@/types/ai";
 import { NextRequest } from "next/server";
 
@@ -22,8 +22,7 @@ export async function POST(req: NextRequest) {
       "\n\nCurrent question:\n";
   }
 
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-pro",
+  const response = await generateContentWithFallback({
     contents: ` You are "Smart Doctor" – an AI-powered medical assistant. Follow these rules carefully:
 
                 1. Response Language:
